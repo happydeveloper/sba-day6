@@ -1,14 +1,18 @@
 from django.http.response import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 
 # Create your views here.
 
 def index(req):
-    return HttpResponse("<h1>hello world</h1>")
+    # url?id=duru 로 접속했을 경우
+    #id = req.GET.get('id', '') #id querystring id 값이 비어서 들어올경우 에러가 나지 않도록 조치
+    id = req.GET['id']
+    if (req.method == 'GET' and id == 'duru'):
+        return redirect('/home')
 
-def str(request, question_str):
-    return HttpResponse(f"You're {question_str} ")
+    return HttpResponse("<h1>hello world</h1>"+id)
+
 
 
 def detail(request, question_id):
