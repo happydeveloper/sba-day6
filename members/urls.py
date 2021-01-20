@@ -11,6 +11,8 @@ urlpatterns = [
     # ex: /5/vote/
     path('<str:question_id>/vote/', views.vote, name='vote'),
 
+    path('get', views.get_index, name='get_index')
+
 
 
 ]
