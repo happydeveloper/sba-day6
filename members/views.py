@@ -6,7 +6,18 @@ from .models import Question
 from django.db.models import Q
 
 # Create your views here.
+from django.http import HttpResponse
+from django.template import loader
+
+from .models import Question
+
+
 def index(request):
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    context = {'latest_question_list': latest_question_list}
+    return render(request, 'members/index.html', context)
+
+def index_s(request):
     latest_question_list = Question.objects.order_by('-pub_date')[1:5] #a:b a+1부터 b까지 , :5 처음부터4까지 
     #qs = Question.objects.get(id=4)
     # get() 은 하나만 가져온다.
